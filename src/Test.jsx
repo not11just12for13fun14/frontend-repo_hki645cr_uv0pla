@@ -11,11 +11,9 @@ function Test() {
 
   const checkBackendConnection = async () => {
     try {
-      // Get backend URL from environment variable
       const baseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
       setBackendUrl(baseUrl)
 
-      // Test basic backend connectivity
       const response = await fetch(`${baseUrl}`, {
         method: 'GET',
         headers: {
@@ -25,16 +23,14 @@ function Test() {
 
       if (response.ok) {
         const data = await response.json()
-        setBackendStatus(`✅ Connected - ${data.message || 'OK'}`)
-        
-        // Now test database connectivity
+        setBackendStatus(`Connected - ${data.message || 'OK'}`)
         await checkDatabaseConnection(baseUrl)
       } else {
-        setBackendStatus(`❌ Failed - ${response.status} ${response.statusText}`)
+        setBackendStatus(`Failed - ${response.status} ${response.statusText}`)
         setDatabaseStatus({ error: 'Backend not accessible' })
       }
     } catch (error) {
-      setBackendStatus(`❌ Error - ${error.message}`)
+      setBackendStatus(`Error - ${error.message}`)
       setDatabaseStatus({ error: 'Backend not accessible' })
     }
   }
@@ -60,30 +56,28 @@ function Test() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Backend & Database Test
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-[#EFF6FF] to-white p-8">
+      <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow">
+        <h1 className="text-2xl font-bold text-[#1E3A8A] mb-6">Backend & Database Test</h1>
 
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Backend URL:</h3>
-            <p className="text-sm text-gray-600 break-all bg-gray-100 p-2 rounded">
+            <h3 className="text-sm font-semibold text-slate-700 mb-1">Backend URL:</h3>
+            <p className="text-sm text-slate-600 break-all bg-slate-100 p-2 rounded">
               {backendUrl || 'Detecting...'}
             </p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Backend Status:</h3>
-            <p className="text-sm font-mono bg-gray-100 p-2 rounded">
+            <h3 className="text-sm font-semibold text-slate-700 mb-1">Backend Status:</h3>
+            <p className="text-sm font-mono bg-slate-100 p-2 rounded">
               {backendStatus}
             </p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Database Status:</h3>
-            <div className="text-sm bg-gray-100 p-3 rounded">
+            <h3 className="text-sm font-semibold text-slate-700 mb-1">Database Status:</h3>
+            <div className="text-sm bg-slate-100 p-3 rounded">
               {databaseStatus ? (
                 databaseStatus.error ? (
                   <p className="text-red-600 font-mono">{databaseStatus.error}</p>
@@ -100,21 +94,21 @@ function Test() {
                   </div>
                 )
               ) : (
-                <p className="text-gray-500 font-mono">Checking database...</p>
+                <p className="text-slate-500 font-mono">Checking database...</p>
               )}
             </div>
           </div>
 
           <button
             onClick={checkBackendConnection}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors"
+            className="w-full bg-[#1E3A8A] hover:bg-[#0f1f4a] text-white font-semibold py-2 px-4 rounded transition-colors"
           >
             Test Again
           </button>
 
           <a
             href="/"
-            className="block w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded text-center transition-colors"
+            className="block w-full bg-[#F59E0B] hover:brightness-95 text-[#1E3A8A] font-semibold py-2 px-4 rounded text-center transition-colors"
           >
             Back to Home
           </a>

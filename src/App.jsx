@@ -1,28 +1,40 @@
-import { useState } from 'react'
+import React from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Home from './pages/Home'
+import Service from './pages/Service'
+import StatePage from './pages/State'
+import CityPage from './pages/City'
+import LocalService from './pages/LocalService'
+import { AboutPage, MenuPage, LocationsPage, CateringPage, LicensingPage, EventsPage, WholesalePage, EmploymentPage, ContactPage } from './pages/static/TopPages'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function AppRouter() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      {/* Top-level static pages */}
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/menu" element={<MenuPage />} />
+      <Route path="/locations" element={<LocationsPage />} />
+      <Route path="/catering" element={<CateringPage />} />
+      <Route path="/licensing" element={<LicensingPage />} />
+      <Route path="/events" element={<EventsPage />} />
+      <Route path="/wholesale" element={<WholesalePage />} />
+      <Route path="/employment" element={<EmploymentPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+
+      {/* Service hubs */}
+      <Route path="/:serviceKey" element={<Service />} />
+
+      {/* State and cities */}
+      <Route path="/:stateKey" element={<StatePage />} />
+      <Route path="/:stateKey/:cityKey" element={<CityPage />} />
+
+      {/* Local services */}
+      <Route path="/:stateKey/:cityKey/:serviceKey" element={<LocalService />} />
+
+      {/* Legacy */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   )
 }
-
-export default App

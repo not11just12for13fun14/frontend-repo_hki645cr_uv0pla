@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://micholandia.com/sitemap-core.xml
+Sitemap: https://micholandia.com/sitemap-services.xml
+Sitemap: https://micholandia.com/sitemap-locations.xml
+Sitemap: https://micholandia.com/sitemap-local.xml
